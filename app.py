@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
+from livereload import Server
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello World"
+    return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(debug=True) # set debug to false when launch flask app into production environment
-
+    server = Server(app.wsgi_app)
+    server.serve()
